@@ -6,7 +6,19 @@ from models.menu_model import Menu
 
 def get_all_menus():
     db: Session = next(get_db())
-    menus = db.query(Menu).all()
+    query = db.query(Menu)
+
+    # Ambil query parameters
+    search = request.args.get('search')  
+    category = request.args.get('category')  
+
+    # Tambahkan filter jika ada
+    if search:
+        query = query.filter(Menu.name.ilike(f"%{search}%"))  # case-insensitive
+    if category:
+        query = query.filter(Menu.category == category)
+
+    menus = query.all()
     db.close()
 
     return jsonify({

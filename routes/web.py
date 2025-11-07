@@ -21,6 +21,6 @@ menu_bp.route("/<int:menu_id>", methods=["DELETE"])(delete_menu)
 order_bp = Blueprint("orders", __name__)
 
 # Routes Order
-order_bp.route("/", methods=["POST"])(create_order)
-order_bp.route("/", methods=["GET"])(get_all_orders)
+order_bp.route("", methods=["POST"])(create_order)
+order_bp.route("", methods=["GET"])(get_all_orders)
 order_bp.route("/<int:order_id>", methods=["GET"])(get_order_by_id)
